@@ -1,0 +1,3 @@
+/mnt/c/Users/HP/Desktop/Principles of Programming course/blackhole_sim/c-programming-project/build/CMakeFiles/blackhole.dir
+/mnt/c/Users/HP/Desktop/Principles of Programming course/blackhole_sim/c-programming-project/build/CMakeFiles/edit_cache.dir
+/mnt/c/Users/HP/Desktop/Principles of Programming course/blackhole_sim/c-programming-project/build/CMakeFiles/rebuild_cache.dir
