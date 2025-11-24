@@ -48,13 +48,21 @@ int run_visualization(Simulation *sim) {
         draw_circle(0.0f, 0.0f, 0.2f, 30);
 
         // Update simulation step-by-step
+        // create all threads first, then join them all (parallel execution)
         pthread_t threads[sim->num_threads];
+        ThreadArgs args[sim->num_threads];
+        int chunk = sim->num_particles / sim->num_threads;
+        
+        // create all threads
         for (int t = 0; t < sim->num_threads; t++) {
-            ThreadArgs args = {sim, t * (sim->num_particles / sim->num_threads),
-                               (t == sim->num_threads - 1)
-                                   ? sim->num_particles
-                                   : (t + 1) * (sim->num_particles / sim->num_threads)};
-            pthread_create(&threads[t], NULL, update_particles, &args);
+            args[t].sim = sim;
+            args[t].start_idx = t * chunk;
+            args[t].end_idx = (t == sim->num_threads - 1) ? sim->num_particles : (t + 1) * chunk;
+            pthread_create(&threads[t], NULL, update_particles, &args[t]);
+        }
+        
+        // wait for all threads to complete
+        for (int t = 0; t < sim->num_threads; t++) {
             pthread_join(threads[t], NULL);
         }
 

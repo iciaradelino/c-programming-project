@@ -1,4 +1,4 @@
-# c-programming-project
+# C Programming Final Project
 C implementation of a blackhole simulator
 
 
